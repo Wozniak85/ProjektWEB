@@ -1,2 +1,1 @@
-# ProjektWEB
-Projekt na Pracownię Aplikacji Webowych
+Technical Advisor: Jakub Glabus
