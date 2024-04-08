@@ -55,6 +55,17 @@ class DatabaseInterface{
         return await this.#connection.execute(insertQuery, params)
     }
 
+    async removeQuiz(id, nazwa_quizu, autor, pytania){
+        const insertQuery = "DELETE FROM quizy WHERE (id, nazwa_quizu, autor, pytania) VALUES (?,?,?,?)"
+        const params = [id, nazwa_quizu, autor, pytania]
+        return await this.#connection.query(insertQuery, params)
+    }
+
+    async removeUser(id, username, email, password){
+        const insertQuery = "DELETE FROM uzytkownicy WHERE (id, username, email, password) VALUES (?,?,?,?)"
+        const params = [id, username, email, password]
+        return await this.#connection.execute(insertQuery, params)
+    }
 
 }
 module.exports = {DatabaseInterface}
