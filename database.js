@@ -9,7 +9,6 @@ class DatabaseInterface{
     }
     async connect(){
         try{
-            //https://youtu.be/kIc1edMoBu4
             this.#connection = await mysql.createConnection({
                 host: this.host,
                 user: this.user,
@@ -33,5 +32,29 @@ class DatabaseInterface{
     async query(sql){
         return await this.#connection.query(sql)
     }
+    async close(){
+        await this.#connection.end()
+    }
+
+    async addUser(username, email, password){
+        const insertQuery = "INSERT INTO uzytkownicy (username, email, password) VALUES (?,?,?)"
+        const params = [username, email, password]
+        return await this.#connection.execute(insertQuery, params)
+    }
+
+    
+    async addQuiz(nazwa_quizu, autor, pytania){
+        const insertQuery = "INSERT INTO quizy (nazwa_quizu, autor, pytania) VALUES (?,?,?)"
+        const params = [nazwa_quizu, autor, pytania]
+        return await this.#connection.query(insertQuery, params)
+    }
+
+    async addResult(user_id, quiz_id, wynik){
+        const insertQuery = "INSERT INTO wyniki (user_id, quiz_id, wynik)"
+        const params = [user_id, quiz_id, wynik]
+        return await this.#connection.execute(insertQuery, params)
+    }
+
+
 }
 module.exports = {DatabaseInterface}
